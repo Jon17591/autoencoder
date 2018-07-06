@@ -46,31 +46,27 @@ class Network:
             for j in range(self.hidden_nodes):
                 change_in=np.append(data,1)[i]*self.hidden_return[j]*(1-self.hidden_return[j])*np.matmul(self.weight_mat_out[j,:],(expected-actual))
                 self.weight_mat_in[i,j]=self.weight_mat_in[i,j]+(0.75*change_in)
-                
-                
-                
 
 def Loss_Function(expected,actual):
     return np.sum(np.square(expected-actual))
 
 a=Network(4,2,4)
-data=np.array([[0,0],[0,1],[1,0],[1,1]])
-outputs=np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]])
+data=np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]])
 loss=[]
 start_time=time()
 for i in range(5000):
     for i in range(len(data)):
-        actual=a.Layer_Out(a.Layer_In(outputs[i]))
-        loss.append(Loss_Function(outputs[i],actual))
-        a.Minimise_Error(outputs[i],outputs[i],actual)
+        actual=a.Layer_Out(a.Layer_In(data[i]))
+        loss.append(Loss_Function(data[i],actual))
+        a.Minimise_Error(data[i],data[i],actual)
         
 print("The elapsed time is %s"%(time()-start_time))
 plot.plot(loss)
 
 for i in range(len(data)):
-    actual=a.Layer_Out(a.Layer_In(outputs[i]))
+    actual=a.Layer_Out(a.Layer_In(data[i]))
     print(np.round(actual,decimals=1))
-    print(Loss_Function(outputs[i],actual))
+    print(Loss_Function(data[i],actual))
     
 
 
