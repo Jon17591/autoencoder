@@ -85,7 +85,7 @@ a=Network(4,2,4) #Initialise network arguments are input dimension, hidden dimen
 data=np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]) #My codewords which the autoencoder is trying to learn a mapping for
 loss=[] #record loss values
 start_time=time() #allows for measuring of elapsed time. 
-for i in range(5000): 
+for i in range(1000): 
     loss_temp=[] #loss log for this iteration through data
     for i in range(len(data)):
         actual=a.Layer_Out(a.Layer_In(data[i])) #pass data through neural network and calculate the value it thinks it should be. 
